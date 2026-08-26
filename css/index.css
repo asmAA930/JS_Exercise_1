@@ -1,0 +1,176 @@
+/* ____________________________________ Gallery ____________________________________ */
+#Gallery .container .row .box .item {
+    border-radius: 10px;
+    position: relative;
+
+    max-width: 250px;
+    margin: auto;
+}
+
+#Gallery .container .row .box .item .image {
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+#Gallery .container .row .box .item .image img {
+    transition-duration: 0.5s;
+}
+
+#Gallery .container .row .box .item:hover .image img {
+    transform: scale(1.2);
+}
+
+#Gallery .container .row .box .item .layout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: inherit;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+#Gallery .container .row .box .item:hover .layout {
+    opacity: 1;
+}
+
+#Gallery .container .row .box .item .layout i {
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+#Gallery .container .row .box .item .layout i:hover {
+    transform: rotate(180deg);
+    color: var(--bs-warning);
+}
+
+/* ____________________________________ PopUp ____________________________________ */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgb(44, 83, 100, 0.5), rgb(32, 58, 67, 0.5), rgb(15, 32, 39, 0.5));
+
+    opacity: 0;
+    display: none;
+    transition-duration: 0.5s;
+}
+
+.popup.active {
+    display: flex;
+}
+
+.popup.show {
+    opacity: 1;
+}
+
+.popup .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup .container .box {
+    max-width: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+
+    /* transition-duration: 0.5s; */
+}
+
+
+.popup .container .box.invalid_key_effect {
+    animation: invalid_key_effect 0.2s linear 2;
+}
+
+.popup .container .box.same_image_effect {
+    animation: same_image_effect 0.3s linear;
+}
+
+.popup .container .box .wrapper_icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.popup .container .box .icons {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.popup .container .box .icons i {
+    font-size: 14px;
+}
+
+.popup .container .box .icons i,
+.popup .container .box .icons ul li {
+    background: var(--bg-gradient);
+    color: var(--bs-warning);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup .container .box .icons .close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.popup .container .box .icons .prev,
+.popup .container .box .icons .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.popup .container .box .icons .prev {
+    left: 0px;
+}
+
+.popup .container .box .icons .next {
+    right: 0px;
+}
+
+.popup .container .box .icons .indicators {
+    position: absolute;
+    bottom: 0px;
+    margin: 0;
+    padding: 5px 0px;
+    font-weight: 500;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.popup .container .box .icons .indicators li {
+    flex-shrink: 0;
+}
+
+.popup .container .box .icons .indicators li.active {
+    background: #fff;
+}
+
+.popup .container .box .icons .indicators li.box_shadow {
+    box-shadow: 0px 0px 2px 3px var(--bs-warning);
+}
