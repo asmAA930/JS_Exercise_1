@@ -16,7 +16,9 @@ let popupOpenKeys = document.querySelectorAll("#Gallery .popupKey"),
     popupNextKey = popupElement.querySelector(".next"),
     currentImg,
     currentImgSrc,
-    currentImgIndex;
+    currentImgIndex,
+    key = '',
+    lastTimeOut;
 
 // Instead of finding the current image's index in the galleryImages array,
 // you can assign a data-index attribute to each image and access it directly using:
@@ -71,7 +73,7 @@ popupOpenKeys.forEach(function (popupKey, currentOpenKeyIndex) {
 
 //! _______________________________________ Keyboard_Control _______________________________________
 
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keyup", function (event) {
 
     if (popupElement.classList.contains("show")) {
 
@@ -84,43 +86,43 @@ document.addEventListener("keydown", function (event) {
 
         //* __________________ ArrowLeft __________________
 
-        if (event.key == "ArrowLeft") {
+        else if (event.key == "ArrowLeft") {
             showPreviousImage();
             updateIndicators();
         }
 
         //* __________________ Escape __________________
 
-        if (event.key == "Escape") {
+        else if (event.key == "Escape") {
             close(popupElement);
         }
+
         //* __________________ Keyboard Numbers __________________
 
-        let key = +event.key;
+        else if (Number.isInteger(+event.key)) {
+            key += event.key;
 
-        // Special Effect for Current Image Key
-
-        if (key == currentImgIndex + 1) {
-            triggerSameImageEffect();
-        }
-
-        // Image Change with Keyboard Numbers
-
-        else if (key >= 1 && key <= galleryImages.length) {
-
-            currentImgIndex = key - 1;
-            currentImg = galleryImages[currentImgIndex];
-            currentImgSrc = currentImg.getAttribute("src");
-            updatePopupImg(currentImgSrc);
-            updateIndicators();
+            clearTimeout(lastTimeOut);
+            lastTimeOut = setTimeout(function () {
+                fireKey(key);
+                key = '';
+            }, 400);
 
         }
 
-        // Special Effect for Invalid Keys
+        //* OR --------------------------
 
-        else if (key < 1 || key > galleryImages.length) {
-            triggerInvalidKeyEffect();
-        }
+        // else if (Number.isInteger(+event.key) || event.key == "Enter") {
+
+        //     key += event.key;
+        //     key = parseInt(key);
+
+        //     if (event.key == "Enter") {
+        //         fireKey(key);
+        //         key = '';
+        //     }
+        // }
+        
     }
 
 });

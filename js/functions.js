@@ -55,17 +55,9 @@ function updateIndicators() {
     oldIndicator.classList.remove("active");
     newIndicator.classList.add("active");
 
-    // ______________ box shadow for center indicator ____________________
-    let centerIndicatorIndex = parseInt((popupIndicators.length - 1) / 2),
-        centerIndicator = popupIndicators[centerIndicatorIndex];
-
-    if (currentImgIndex == centerIndicatorIndex - 1) {
-        centerIndicator.classList.add("box_shadow");
-    }
-
-    if (currentImgIndex == centerIndicatorIndex) {
-        centerIndicator.classList.remove("box_shadow");
-    }
+    newIndicator.scrollIntoView(
+        { inline: "center" }
+    );
 }
 
 //! ________________________________________________
@@ -86,4 +78,34 @@ function triggerInvalidKeyEffect() {
     setTimeout(() => {
         popupBox.classList.remove("invalid_key_effect");
     }, 400);
+}
+
+
+//! ________________________________________________
+function fireKey(key) {
+
+
+    // Special Effect for Current Image Key
+
+    if (key == (currentImgIndex + 1)) {
+        triggerSameImageEffect();
+    }
+
+    // Image Change with Keyboard Numbers
+
+    else if (key >= 1 && key <= galleryImages.length) {
+
+        currentImgIndex = key - 1;
+        currentImg = galleryImages[currentImgIndex];
+        currentImgSrc = currentImg.getAttribute("src");
+        updatePopupImg(currentImgSrc);
+        updateIndicators();
+
+    }
+
+    // Special Effect for Invalid Keys
+
+    else if (key < 1 || key > galleryImages.length) {
+        triggerInvalidKeyEffect();
+    }
 }
