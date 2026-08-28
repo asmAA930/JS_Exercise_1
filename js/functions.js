@@ -55,9 +55,7 @@ function updateIndicators() {
     oldIndicator.classList.remove("active");
     newIndicator.classList.add("active");
 
-    newIndicator.scrollIntoView(
-        { inline: "center" }
-    );
+    newIndicator.scrollIntoView();
 }
 
 //! ________________________________________________
